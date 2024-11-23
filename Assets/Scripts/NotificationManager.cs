@@ -27,8 +27,16 @@ public class NotificationManager : MonoBehaviour
         {
             using (AndroidJavaClass notificationPlugin = new AndroidJavaClass("com.rc.ciardo_roberto_gametech_challenge_android.NotificationPlugin"))
             {
-                notificationPlugin.CallStatic("scheduleNotifications");
+                notificationPlugin.CallStatic("scheduleNotifications", GetUnityActivity());
             }
+        }
+    }
+
+    private AndroidJavaObject GetUnityActivity()
+    {
+        using (AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+        {
+            return unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
         }
     }
 }
