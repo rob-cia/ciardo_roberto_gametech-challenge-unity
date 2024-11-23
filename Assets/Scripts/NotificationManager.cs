@@ -22,5 +22,13 @@ public class NotificationManager : MonoBehaviour
     private void ScheduleNotifications()
     {
         Debug.Log("OnClick: Send notifications");
+
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            using (AndroidJavaClass notificationPlugin = new AndroidJavaClass("com.rc.ciardo_roberto_gametech_challenge_android.NotificationPlugin"))
+            {
+                notificationPlugin.CallStatic("scheduleNotifications");
+            }
+        }
     }
 }
