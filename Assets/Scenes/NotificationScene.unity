@@ -1542,7 +1542,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1825815969
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1611,6 +1611,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2039088131}
   - component: {fileID: 2039088130}
+  - component: {fileID: 2039088132}
   m_Layer: 0
   m_Name: NotificationManager
   m_TagString: Untagged
@@ -1647,6 +1648,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2039088132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039088129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e49c3158cc34874da82cb6184bbab35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  titleText: {fileID: 1678316638}
+  descriptionText: {fileID: 312902386}
+  icon: {fileID: 602525425}
 --- !u!224 &2123107701 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4070678776076735886, guid: 3da948a4639758c4f832791a34298973, type: 3}
