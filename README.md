@@ -23,6 +23,14 @@ ___
 
 <img src="https://github.com/user-attachments/assets/704fd597-164a-4d90-9bf3-8b25ebd0b384" alt="layout" width="200"/>
 
+#### *TAG: Unity-Touched-Notification-Data*
+- Includes an header layout with notification information about the touched data.
+- Creation of an header at the top with centering of the title app and notification informations.
+
+<img src="https://github.com/user-attachments/assets/84286909-56cf-4bff-bd4a-ece94848f71b" alt="layout" width="200"/>
+
+___
+
 ---
 
 ### **Scripts**
@@ -55,6 +63,34 @@ ___
 - **Method**: `void RemoveNotifications()`
 - **Description**: Call the plugin's removeNotification function
 - **Details**: Removes all notifications scheduled in the future.
+
+___
+
+#### *TAG: Unity-Touched-Notification-Data*
+
+#### **Notification Receiver**
+- **Method**: `UpdateNotificatioUI()`
+- **Description**: 
+  Updates the UI to display the notification content (title, description, and icon) if available.
+- **Details**:
+  - Retrieves notification data (title, description, and icon) using the `GetNotificationData()` method.
+
+#### **On Application Focus**
+- **Method**: `OnApplicationFocus(bool hasFocus)`
+- **Description**: 
+  Updates the notification UI whenever the application regains focus.
+- **Details**:
+  - Calls `UpdateNotificatioUI()` when the application gains focus to ensure that the most recent notification is displayed.
+
+#### **Get Notification Data**
+- **Method**: `GetNotificationData(string key)`
+- **Description**: 
+  Retrieves notification data (title, description, or icon) from the incoming `Intent`.
+- **Parameters**:
+  - `string key`: The key to retrieve the specific data (`"title"`, `"description"`, or `"icon"`).
+- **Details**:
+  - Uses Android's `Intent` system to retrieve the specified data from the notification that triggered the receiver.
+  - Calls `getStringExtra` on the `Intent` to fetch the value associated with the provided key.
 
 ---
 
