@@ -9,7 +9,10 @@ public class NotificationReceiver : MonoBehaviour
     [SerializeField]
     private TMP_Text descriptionText;
     [SerializeField]
-    private Image icon;
+    private RawImage iconImage;
+
+    [SerializeField]
+    private Texture2D[] iconArray;
 
 
     void Start()
@@ -20,7 +23,7 @@ public class NotificationReceiver : MonoBehaviour
 
         if (!string.IsNullOrEmpty(title))
         {
-            titleText.text = "Titolo: " + title + " " + icon;
+            titleText.text = "Titolo: " + title;
         }
 
         if (!string.IsNullOrEmpty(description))
@@ -30,7 +33,7 @@ public class NotificationReceiver : MonoBehaviour
 
         if (!string.IsNullOrEmpty(icon))
         {
-            Debug.Log("NotificationReceiver at start have icon = " + icon);
+            iconImage.texture = iconArray[int.Parse(icon)];
         }
     }
 
