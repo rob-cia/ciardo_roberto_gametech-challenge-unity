@@ -1733,10 +1733,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e49c3158cc34874da82cb6184bbab35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleText: {fileID: 1678316638}
-  descriptionText: {fileID: 312902386}
-  iconImage: {fileID: 1689538215}
-  iconArray:
+  _titleText: {fileID: 1678316638}
+  _descriptionText: {fileID: 312902386}
+  _iconImage: {fileID: 1689538215}
+  _iconArray:
   - {fileID: 2800000, guid: f1f594e32471b3b43968308d2d96f5e8, type: 3}
   - {fileID: 2800000, guid: 3f21c691b199b0c44bdf0b295794fd36, type: 3}
   - {fileID: 2800000, guid: 9d9cedd68484a15488fe352cc3fa34a9, type: 3}

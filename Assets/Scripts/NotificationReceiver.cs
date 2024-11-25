@@ -4,37 +4,62 @@ using UnityEngine.UI;
 
 public class NotificationReceiver : MonoBehaviour
 {
+    [Header("Notification displayed")]
     [SerializeField]
-    private TMP_Text titleText;
+    private TMP_Text _titleText;
     [SerializeField]
-    private TMP_Text descriptionText;
+    private TMP_Text _descriptionText;
     [SerializeField]
-    private RawImage iconImage;
+    private RawImage _iconImage;
 
+    [Header("Notification icon list")]
     [SerializeField]
-    private Texture2D[] iconArray;
+    private Texture2D[] _iconArray = null;
 
 
     void Start()
     {
+        if (!CheckInspectorParameterIsCorrect()) 
+            return;
+
         string title = GetNotificationData("title");
         string description = GetNotificationData("description");
         string icon = GetNotificationData("icon");
 
         if (!string.IsNullOrEmpty(title))
         {
-            titleText.text = "Titolo: " + title;
+            _titleText.text = "Titolo: " + title;
         }
 
         if (!string.IsNullOrEmpty(description))
         {
-            descriptionText.text = "Descrizione: " + description;
+            _descriptionText.text = "Descrizione: " + description;
         }
 
         if (!string.IsNullOrEmpty(icon))
         {
-            iconImage.texture = iconArray[int.Parse(icon)];
+            _iconImage.texture = _iconArray[int.Parse(icon)];
         }
+    }
+
+    private bool CheckInspectorParameterIsCorrect()
+    {
+        if (_titleText == null)
+        {
+            Debug.LogError("NotificationReceiver requires connecting a title text in the inspector");
+            return false;
+        }
+        if (_descriptionText == null)
+        {
+            Debug.LogError("NotificationReceiver requires connecting a description text in the inspector");
+            return false;
+        }
+        if (_iconImage == null)
+        {
+            Debug.LogError("NotificationReceiver requires connecting an icon rawImage in the inspector");
+            return false;
+        }
+        return true;
     }
 
     private string GetNotificationData(string key)
