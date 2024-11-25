@@ -10,6 +10,9 @@ public class NotificationManager : MonoBehaviour
     [SerializeField]
     Button _removeButton = null;
 
+    [Header("Notification diplayed")]
+    [SerializeField] private NotificationProperties[] _notificationProperties;
+
     void Start()
     {
         if(_sendButton == null)
@@ -25,6 +28,18 @@ public class NotificationManager : MonoBehaviour
 
         _sendButton.onClick.AddListener(ScheduleNotifications);
         _removeButton.onClick.AddListener(RemoveNotifications);
+
+        InitializedNotificationProperties();
+    }
+
+    void Update()
+    {
+            
+    }
+
+    private void InitializedNotificationProperties()
+    {
+        foreach (NotificationProperties notification in _notificationProperties) { notification.InitializedNotificationProperties(); }
     }
 
     private void ScheduleNotifications()

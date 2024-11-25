@@ -12,11 +12,14 @@ public class NotificationProperties : MonoBehaviour
     [Header("Notification icon list")]
     [SerializeField] private Texture2D[] _iconArray = null;
 
-    public void InitializeNotificationProperties()
+    public void InitializedNotificationProperties()
     {
         _titleText = transform.Find("TitleText").GetComponent<TMP_Text>();
         _descriptionText = transform.Find("DescriptionText").GetComponent<TMP_Text>();
-        _iconRawImage = transform.Find("IconRawImage").GetComponent<RawImage>();
+        _iconRawImage = transform.Find("IconBackground/IconRawImage").GetComponent<RawImage>();
+
+        // test
+        SetTitle(transform.gameObject.name);
     }
 
     public void SetNotificationId(int notificationId) { _notificationId = notificationId; }
