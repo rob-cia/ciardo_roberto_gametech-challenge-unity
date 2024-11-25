@@ -21,6 +21,19 @@ public class NotificationReceiver : MonoBehaviour
         if (!CheckInspectorParameterIsCorrect()) 
             return;
 
+        UpdateNotificatioUI();
+    }
+
+    void OnApplicationFocus(bool hasFocus)
+    {
+        if (hasFocus)
+        {
+            UpdateNotificatioUI();
+        }
+    }
+
+    private void UpdateNotificatioUI()
+    {
         string title = GetNotificationData("title");
         string description = GetNotificationData("description");
         string icon = GetNotificationData("icon");
