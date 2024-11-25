@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 2064122349440084613}
   - component: {fileID: 9005046786590667335}
   - component: {fileID: 4751507634590626749}
+  - component: {fileID: 8154585082210746955}
   m_Layer: 5
   m_Name: Notification
   m_TagString: Untagged
@@ -154,6 +155,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8154585082210746955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3007502040686167514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a55f413af37d0147b81d0a7dc01434a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _iconArray:
+  - {fileID: 2800000, guid: f1f594e32471b3b43968308d2d96f5e8, type: 3}
+  - {fileID: 2800000, guid: 3f21c691b199b0c44bdf0b295794fd36, type: 3}
+  - {fileID: 2800000, guid: 9d9cedd68484a15488fe352cc3fa34a9, type: 3}
+  - {fileID: 2800000, guid: 5ef665dcaa2b1034baef8a6cb0d52932, type: 3}
+  - {fileID: 2800000, guid: 2e98295e0cad10144a91778f6e94e772, type: 3}
 --- !u!1 &3382033640616727965
 GameObject:
   m_ObjectHideFlags: 0
