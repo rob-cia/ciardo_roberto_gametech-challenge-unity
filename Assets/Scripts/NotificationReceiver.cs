@@ -4,17 +4,16 @@ using UnityEngine.UI;
 
 public class NotificationReceiver : MonoBehaviour
 {
+    [Header("Notification Parent")]
+    [SerializeField] private GameObject _notificationParent;
+
     [Header("Notification displayed")]
-    [SerializeField]
-    private TMP_Text _titleText;
-    [SerializeField]
-    private TMP_Text _descriptionText;
-    [SerializeField]
-    private RawImage _iconImage;
+    [SerializeField] private TMP_Text _titleText;
+    [SerializeField] private TMP_Text _descriptionText;
+    [SerializeField] private RawImage _iconImage;
 
     [Header("Notification icon list")]
-    [SerializeField]
-    private Texture2D[] _iconArray = null;
+    [SerializeField] private Texture2D[] _iconArray = null;
 
 
     void Start()
@@ -26,24 +25,27 @@ public class NotificationReceiver : MonoBehaviour
         string description = GetNotificationData("description");
         string icon = GetNotificationData("icon");
 
-        if (!string.IsNullOrEmpty(title))
+        if (!string.IsNullOrEmpty(title) && !string.IsNullOrEmpty(description) && !string.IsNullOrEmpty(icon))
         {
-            _titleText.text = "Titolo: " + title;
-        }
-
-        if (!string.IsNullOrEmpty(description))
-        {
-            _descriptionText.text = "Descrizione: " + description;
-        }
-
-        if (!string.IsNullOrEmpty(icon))
-        {
+            _titleText.text = title;
+            _descriptionText.text = description;
             _iconImage.texture = _iconArray[int.Parse(icon)];
+
+            _notificationParent.SetActive(true);
+        }
+        else
+        {
+            _notificationParent.SetActive(false);
         }
     }
 
     private bool CheckInspectorParameterIsCorrect()
     {
+        if (_notificationParent == null)
+        {
+            Debug.LogError("NotificationReceiver requires connecting a notification parent GameObject in the inspector");
+            return false;
+        }
         if (_titleText == null)
         {
             Debug.LogError("NotificationReceiver requires connecting a title text in the inspector");

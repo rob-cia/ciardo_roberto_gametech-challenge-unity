@@ -1733,6 +1733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e49c3158cc34874da82cb6184bbab35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _notificationParent: {fileID: 936062451}
   _titleText: {fileID: 1678316638}
   _descriptionText: {fileID: 312902386}
   _iconImage: {fileID: 1689538215}
