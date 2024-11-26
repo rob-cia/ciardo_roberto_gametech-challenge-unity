@@ -34,7 +34,42 @@ public class NotificationManager : MonoBehaviour
 
     void Update()
     {
-            
+        UpdateNotificatioUI();
+    }
+
+    private void UpdateNotificatioUI()
+    {
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            using (AndroidJavaClass notificationPlugin = new AndroidJavaClass("com.rc.ciardo_roberto_gametech_challenge_android.NotificationPlugin"))
+            {
+                string[] notifications = notificationPlugin.CallStatic<string[]>("getScheduledNotifications", GetUnityActivity());
+
+                for (int i = 0; i < notifications.Length; i++)
+                {
+                    // Extract notification information
+                    string[] notificationData = notifications[i].Split(':');
+
+                    _notificationProperties[i].SetNotificationId(int.Parse(notificationData[0]));
+                    _notificationProperties[i].SetTitle(notificationData[1]);
+                    _notificationProperties[i].SetDescription(notificationData[2]);
+                    
+                    long triggerTime = long.Parse(notificationData[3]);
+
+                    // Get the current time in milliseconds since January 1, 1970 (like System.currentTimeMillis in Android)
+                    long currentTimeMillis = System.DateTime.UtcNow.Ticks / System.TimeSpan.TicksPerMillisecond - 62135596800000L; // Convert from Ticks to milliseconds, but subtract the DateTime epoch
+
+                    if (triggerTime <= currentTimeMillis)
+                    {
+                        _notificationProperties[i].gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        _notificationProperties[i].gameObject.SetActive(true);
+                    }
+                }
+            }
+        }
     }
 
     private void InitializedNotificationProperties()
