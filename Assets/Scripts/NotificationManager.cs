@@ -53,8 +53,9 @@ public class NotificationManager : MonoBehaviour
                     _notificationProperties[i].SetNotificationId(int.Parse(notificationData[0]));
                     _notificationProperties[i].SetTitle(notificationData[1]);
                     _notificationProperties[i].SetDescription(notificationData[2]);
+                    _notificationProperties[i].SetIcon(int.Parse(notificationData[3]));
                     
-                    long triggerTime = long.Parse(notificationData[3]);
+                    long triggerTime = long.Parse(notificationData[4]);
 
                     // Get the current time in milliseconds since January 1, 1970 (like System.currentTimeMillis in Android)
                     long currentTimeMillis = System.DateTime.UtcNow.Ticks / System.TimeSpan.TicksPerMillisecond - 62135596800000L; // Convert from Ticks to milliseconds, but subtract the DateTime epoch
