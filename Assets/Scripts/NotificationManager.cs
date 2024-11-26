@@ -30,6 +30,14 @@ public class NotificationManager : MonoBehaviour
         _removeButton.onClick.AddListener(RemoveNotifications);
 
         InitializedNotificationProperties();
+
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            using (AndroidJavaClass notificationPlugin = new AndroidJavaClass("com.rc.ciardo_roberto_gametech_challenge_android.NotificationPlugin"))
+            {
+                notificationPlugin.CallStatic("onStartup", GetUnityActivity());
+            }
+        }
     }
 
     void Update()
@@ -50,22 +58,18 @@ public class NotificationManager : MonoBehaviour
                     // Extract notification information
                     string[] notificationData = notifications[i].Split(':');
 
-                    _notificationProperties[i].SetNotificationId(int.Parse(notificationData[0]));
-                    _notificationProperties[i].SetTitle(notificationData[1]);
-                    _notificationProperties[i].SetDescription(notificationData[2]);
-                    _notificationProperties[i].SetIcon(int.Parse(notificationData[3]));
-                    
-                    long triggerTime = long.Parse(notificationData[4]);
+                    string status = notificationData[5];
 
-                    // Get the current time in milliseconds since January 1, 1970 (like System.currentTimeMillis in Android)
-                    long currentTimeMillis = System.DateTime.UtcNow.Ticks / System.TimeSpan.TicksPerMillisecond - 62135596800000L; // Convert from Ticks to milliseconds, but subtract the DateTime epoch
-
-                    if (triggerTime <= currentTimeMillis)
-                    {
+                    if (status == "cancelled") {
                         _notificationProperties[i].gameObject.SetActive(false);
                     }
                     else
                     {
+                        _notificationProperties[i].SetNotificationId(int.Parse(notificationData[0]));
+                        _notificationProperties[i].SetTitle(notificationData[1]);
+                        _notificationProperties[i].SetDescription(notificationData[2]);
+                        _notificationProperties[i].SetIcon(int.Parse(notificationData[3]));
+
                         _notificationProperties[i].gameObject.SetActive(true);
                     }
                 }
