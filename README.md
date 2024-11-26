@@ -23,6 +23,8 @@ ___
 
 <img src="https://github.com/user-attachments/assets/704fd597-164a-4d90-9bf3-8b25ebd0b384" alt="layout" width="200"/>
 
+___
+
 #### *TAG: Unity-Touched-Notification-Data*
 - Includes an header layout with notification information about the touched data.
 - Creation of an header at the top with centering of the title app and notification informations.
@@ -30,6 +32,14 @@ ___
 <img src="https://github.com/user-attachments/assets/84286909-56cf-4bff-bd4a-ece94848f71b" alt="layout" width="200"/>
 
 ___
+
+#### *TAG: Unity-List-Scheduled-Notifications*
+- Includes a content layout with the 5 notification information. A 1-column grid is used.
+- Creating a prefab for notification handling.
+
+<img src="https://github.com/user-attachments/assets/50a27446-5b32-4084-b6b0-a49e445259bd" alt="layout" width="200"/>
+<img src="https://github.com/user-attachments/assets/37ae6f15-76d4-4709-8096-1966df8bb82e" alt="layout" width="200"/>
+
 
 ---
 
@@ -91,6 +101,40 @@ ___
 - **Details**:
   - Uses Android's `Intent` system to retrieve the specified data from the notification that triggered the receiver.
   - Calls `getStringExtra` on the `Intent` to fetch the value associated with the provided key.
+
+____
+
+#### *TAG: Unity-List-Scheduled-Notifications*
+
+#### **Notification Properties Management**
+- **Class**: `NotificationProperties`
+- **Description**: Manages the properties of a single notification, including its ID, title, description, and icon. Provides initialization and update methods for UI elements.
+- **Details**:
+  - Dynamically retrieves and sets notification properties, such as text and icon, from Unity UI components.
+  - Supports a predefined list of icons (`_iconArray`) for efficient icon management.
+- **Serialized Fields**:
+  - `Texture2D[] _iconArray`: An array of icon textures used to display notification icons.
+- **Private Fields**:
+  - `int _notificationId`: Unique identifier for the notification.
+  - `TMP_Text _titleText`: Reference to the UI text component for the notification title.
+  - `TMP_Text _descriptionText`: Reference to the UI text component for the notification description.
+  - `RawImage _iconRawImage`: Reference to the UI image component for the notification icon.
+
+#### **Update Notification UI**
+- **Method**: `UpdateNotificatioUI()`
+- **Description**: Updates the Unity UI to reflect the current state of scheduled notifications retrieved from the Android plugin.
+- **Details**:
+  - Retrieves the list of scheduled notifications from the native Android plugin via `getScheduledNotifications`.
+  - Parses notification data (e.g., ID, title, description, icon, and status) to update Unity UI components dynamically.
+  - Hides cancelled notifications and displays active ones with appropriate details.
+ 
+#### **Request Updated Data**
+- **Method**: `RequestUpdatedData()`
+- **Description**: Requests the updated data of scheduled notifications from the Android plugin when the app starts or when it gains focus.
+- **Details**:
+  - **Platform Check**: Executes only on Android platform (`RuntimePlatform.Android`).
+  - Calls the static method `onStartup` from the Android plugin (`NotificationPlugin`) to refresh or synchronize notification data.
+  - Ensures that the notifications are updated when the app is brought into focus or started.
 
 ---
 
