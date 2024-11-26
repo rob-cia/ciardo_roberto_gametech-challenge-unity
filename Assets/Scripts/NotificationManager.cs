@@ -31,6 +31,24 @@ public class NotificationManager : MonoBehaviour
 
         InitializedNotificationProperties();
 
+        RequestUpdatedData();
+    }
+
+    void OnApplicationFocus(bool hasFocus)
+    {
+        if (hasFocus)
+        {
+            RequestUpdatedData();
+        }
+    }
+
+    void Update()
+    {
+        UpdateNotificatioUI();
+    }
+
+    private void RequestUpdatedData()
+    {
         if (Application.platform == RuntimePlatform.Android)
         {
             using (AndroidJavaClass notificationPlugin = new AndroidJavaClass("com.rc.ciardo_roberto_gametech_challenge_android.NotificationPlugin"))
@@ -38,11 +56,6 @@ public class NotificationManager : MonoBehaviour
                 notificationPlugin.CallStatic("onStartup", GetUnityActivity());
             }
         }
-    }
-
-    void Update()
-    {
-        UpdateNotificatioUI();
     }
 
     private void UpdateNotificatioUI()
