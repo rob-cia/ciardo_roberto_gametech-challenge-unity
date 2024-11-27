@@ -40,6 +40,14 @@ ___
 <img src="https://github.com/user-attachments/assets/50a27446-5b32-4084-b6b0-a49e445259bd" alt="layout" width="200"/>
 <img src="https://github.com/user-attachments/assets/37ae6f15-76d4-4709-8096-1966df8bb82e" alt="layout" width="200"/>
 
+___
+
+#### *TAG: Unity-Remove-Scheduled-Notification*
+- Includes a new fixed button layout on each notification that allows you to dismiss it.
+- Editing a prefab to handle notifications.
+
+<img src="https://github.com/user-attachments/assets/e4217023-fdf2-4866-abe7-47a736eed0e6" alt="layout" width="200"/>
+<img src="https://github.com/user-attachments/assets/0b108510-d7f5-4741-9581-eb768e436b80" alt="layout" width="200"/>
 
 ---
 
@@ -135,6 +143,19 @@ ____
   - **Platform Check**: Executes only on Android platform (`RuntimePlatform.Android`).
   - Calls the static method `onStartup` from the Android plugin (`NotificationPlugin`) to refresh or synchronize notification data.
   - Ensures that the notifications are updated when the app is brought into focus or started.
+
+___
+
+#### *TAG: Unity-Remove-Scheduled-Notification*
+
+#### **On Button Click Remove Notification**
+- **Method**: `OnButtonClickRemoveNotification()`
+- **Description**: Handles the removal of a specific notification when a UI button is clicked in Unity.
+- **Details**:
+  - Checks if `_notificationId` is valid (`NULL_ID` check) before proceeding.
+  - Calls the Android plugin method `removeNotificationById` via `AndroidJavaClass`:
+    - Passes the Unity activity and `_notificationId` to the Android layer.
+  - Triggered by a Unity "deleteButton"'s `OnClick` event.
 
 ---
 
