@@ -14,11 +14,15 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     [Header("Prefab to instantiate")]
     [SerializeField]
-    private DropZone dropZone = null;
+    private DropZone _dropZone = null;
+
+    [Header("Notification Manager")]
+    [SerializeField]
+    private NotificationManager _notificationManager = null;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        placeHolder = Instantiate(dropZone.placeHolder);//new GameObject();
+        placeHolder = Instantiate(_dropZone.placeHolder);//new GameObject();
         placeHolder.transform.SetParent(this.transform.parent);
         LayoutElement le = placeHolder.AddComponent<LayoutElement>();
         le.preferredWidth = this.GetComponent<LayoutElement>().preferredWidth;
@@ -68,5 +72,18 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         this.transform.SetSiblingIndex(placeHolder.transform.GetSiblingIndex());
         this.GetComponent<CanvasGroup>().blocksRaycasts = true;
         Destroy(placeHolder);
+
+        UpdateOrder(); 
+    }
+
+    private void UpdateOrder()
+    {
+        if (_notificationManager == null)
+        {
+            Debug.LogError("Draggable requires connecting a NotificationManager in the inspector");
+            return;
+        }
+
+        _notificationManager.UpdateOrderOnDragAndDrop();
     }
 }

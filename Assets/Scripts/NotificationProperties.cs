@@ -6,7 +6,7 @@ public class NotificationProperties : MonoBehaviour
 {
     private const int NULL_ID = -1;
 
-    private int _notificationId;
+    public int _notificationId;
     private TMP_Text _titleText;
     private TMP_Text _descriptionText;
     private RawImage _iconRawImage;

@@ -13,6 +13,9 @@ public class NotificationManager : MonoBehaviour
     [Header("Notification diplayed")]
     [SerializeField] private NotificationProperties[] _notificationProperties;
 
+    [Header("Notifications Parent")]
+    [SerializeField] private GameObject _notificationParent;
+
     void Start()
     {
         if(_sendButton == null)
@@ -126,6 +129,28 @@ public class NotificationManager : MonoBehaviour
         using (AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
         {
             return unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+        }
+    }
+
+    public void UpdateOrderOnDragAndDrop()
+    {
+        NotificationProperties[] notificationProperties = _notificationParent.GetComponentsInChildren<NotificationProperties>();
+        int[] notificationId = new int[5];
+
+        for (int i = 0; i < notificationProperties.Length; i++)
+        {
+            notificationId[i] = notificationProperties[i]._notificationId;
+        }
+
+
+        //Debug.Log($"OnEndDrag : {notificationId[0].ToString()} | {notificationId[1].ToString()} | {notificationId[2].ToString()} | {notificationId[3].ToString()} | {notificationId[4].ToString()}");
+
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            using (AndroidJavaClass notificationPlugin = new AndroidJavaClass("com.rc.ciardo_roberto_gametech_challenge_android.NotificationPlugin"))
+            {
+                notificationPlugin.CallStatic("updateOrderOnDragAndDrop", GetUnityActivity(), notificationId);
+            }
         }
     }
 }

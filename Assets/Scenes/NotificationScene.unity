@@ -291,6 +291,14 @@ PrefabInstance:
       propertyPath: dropZone
       value: 
       objectReference: {fileID: 957374206}
+    - target: {fileID: 7944251219258652063, guid: ea2fd9fc3528d5e4488daa025c274532, type: 3}
+      propertyPath: _dropZone
+      value: 
+      objectReference: {fileID: 957374206}
+    - target: {fileID: 7944251219258652063, guid: ea2fd9fc3528d5e4488daa025c274532, type: 3}
+      propertyPath: _notificationManager
+      value: 
+      objectReference: {fileID: 2039088130}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1009,6 +1017,14 @@ PrefabInstance:
       propertyPath: dropZone
       value: 
       objectReference: {fileID: 957374206}
+    - target: {fileID: 7944251219258652063, guid: ea2fd9fc3528d5e4488daa025c274532, type: 3}
+      propertyPath: _dropZone
+      value: 
+      objectReference: {fileID: 957374206}
+    - target: {fileID: 7944251219258652063, guid: ea2fd9fc3528d5e4488daa025c274532, type: 3}
+      propertyPath: _notificationManager
+      value: 
+      objectReference: {fileID: 2039088130}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1301,6 +1317,14 @@ PrefabInstance:
       propertyPath: dropZone
       value: 
       objectReference: {fileID: 957374206}
+    - target: {fileID: 7944251219258652063, guid: ea2fd9fc3528d5e4488daa025c274532, type: 3}
+      propertyPath: _dropZone
+      value: 
+      objectReference: {fileID: 957374206}
+    - target: {fileID: 7944251219258652063, guid: ea2fd9fc3528d5e4488daa025c274532, type: 3}
+      propertyPath: _notificationManager
+      value: 
+      objectReference: {fileID: 2039088130}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2186,6 +2210,14 @@ PrefabInstance:
       propertyPath: dropZone
       value: 
       objectReference: {fileID: 957374206}
+    - target: {fileID: 7944251219258652063, guid: ea2fd9fc3528d5e4488daa025c274532, type: 3}
+      propertyPath: _dropZone
+      value: 
+      objectReference: {fileID: 957374206}
+    - target: {fileID: 7944251219258652063, guid: ea2fd9fc3528d5e4488daa025c274532, type: 3}
+      propertyPath: _notificationManager
+      value: 
+      objectReference: {fileID: 2039088130}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2321,6 +2353,7 @@ MonoBehaviour:
   - {fileID: 275806509}
   - {fileID: 902781226}
   - {fileID: 694838068}
+  _notificationParent: {fileID: 957374201}
 --- !u!4 &2039088131
 Transform:
   m_ObjectHideFlags: 0
@@ -2651,6 +2684,14 @@ PrefabInstance:
       propertyPath: dropZone
       value: 
       objectReference: {fileID: 957374206}
+    - target: {fileID: 7944251219258652063, guid: ea2fd9fc3528d5e4488daa025c274532, type: 3}
+      propertyPath: _dropZone
+      value: 
+      objectReference: {fileID: 957374206}
+    - target: {fileID: 7944251219258652063, guid: ea2fd9fc3528d5e4488daa025c274532, type: 3}
+      propertyPath: _notificationManager
+      value: 
+      objectReference: {fileID: 2039088130}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
