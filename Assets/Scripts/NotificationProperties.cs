@@ -43,7 +43,7 @@ public class NotificationProperties : MonoBehaviour
 
         //Debug.Log("OnButtonClickRemoveNotification " + _notificationId);
 
-        using (AndroidJavaClass notificationPlugin = new AndroidJavaClass("com.example.notificationplugin.NotificationPlugin"))
+        using (AndroidJavaClass notificationPlugin = new AndroidJavaClass("com.rc.ciardo_roberto_gametech_challenge_android.NotificationPlugin"))
         {
             notificationPlugin.CallStatic("removeNotificationById", GetUnityActivity(), _notificationId);
         }
