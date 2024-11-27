@@ -287,6 +287,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7944251219258652063, guid: ea2fd9fc3528d5e4488daa025c274532, type: 3}
+      propertyPath: dropZone
+      value: 
+      objectReference: {fileID: 957374206}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1001,6 +1005,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7944251219258652063, guid: ea2fd9fc3528d5e4488daa025c274532, type: 3}
+      propertyPath: dropZone
+      value: 
+      objectReference: {fileID: 957374206}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1289,6 +1297,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7944251219258652063, guid: ea2fd9fc3528d5e4488daa025c274532, type: 3}
+      propertyPath: dropZone
+      value: 
+      objectReference: {fileID: 957374206}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1401,6 +1413,7 @@ GameObject:
   - component: {fileID: 957374204}
   - component: {fileID: 957374203}
   - component: {fileID: 957374205}
+  - component: {fileID: 957374206}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -1494,6 +1507,19 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 200}
   m_Constraint: 1
   m_ConstraintCount: 1
+--- !u!114 &957374206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957374201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd06001ac58e39b44a9f932bc2309acd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeHolder: {fileID: 3007502040686167514, guid: 540d18078e468494bbfae74d031df06f, type: 3}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2156,6 +2182,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7944251219258652063, guid: ea2fd9fc3528d5e4488daa025c274532, type: 3}
+      propertyPath: dropZone
+      value: 
+      objectReference: {fileID: 957374206}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2617,6 +2647,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7944251219258652063, guid: ea2fd9fc3528d5e4488daa025c274532, type: 3}
+      propertyPath: dropZone
+      value: 
+      objectReference: {fileID: 957374206}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

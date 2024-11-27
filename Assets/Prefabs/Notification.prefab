@@ -220,7 +220,10 @@ GameObject:
   - component: {fileID: 2064122349440084613}
   - component: {fileID: 9005046786590667335}
   - component: {fileID: 4751507634590626749}
+  - component: {fileID: 6802673095191361239}
+  - component: {fileID: 3992824667841973614}
   - component: {fileID: 8154585082210746955}
+  - component: {fileID: 7944251219258652063}
   m_Layer: 5
   m_Name: Notification
   m_TagString: Untagged
@@ -290,6 +293,38 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6802673095191361239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3007502040686167514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
+--- !u!225 &3992824667841973614
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3007502040686167514}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &8154585082210746955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,6 +343,21 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 9d9cedd68484a15488fe352cc3fa34a9, type: 3}
   - {fileID: 2800000, guid: 5ef665dcaa2b1034baef8a6cb0d52932, type: 3}
   - {fileID: 2800000, guid: 2e98295e0cad10144a91778f6e94e772, type: 3}
+--- !u!114 &7944251219258652063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3007502040686167514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d446c4bb6f99ae549b854322313ca7ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentToReturnTo: {fileID: 0}
+  placeHolderParent: {fileID: 0}
+  placeHolder: {fileID: 3007502040686167514, guid: 540d18078e468494bbfae74d031df06f, type: 3}
 --- !u!1 &3382033640616727965
 GameObject:
   m_ObjectHideFlags: 0
