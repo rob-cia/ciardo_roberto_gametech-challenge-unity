@@ -108,6 +108,8 @@ public class NotificationManager : MonoBehaviour
     {
         Debug.Log("OnClick: Send notifications");
 
+        ResetOrderNotificationUI();
+
         if (Application.platform == RuntimePlatform.Android)
         {
             using (AndroidJavaClass notificationPlugin = new AndroidJavaClass("com.rc.ciardo_roberto_gametech_challenge_android.NotificationPlugin"))
@@ -191,6 +193,16 @@ public class NotificationManager : MonoBehaviour
         {
             sortedNotifications[i].transform.SetSiblingIndex(i);
             Debug.Log($"UpdateOrder for {sortedNotifications[i]._notificationId} is {i} (Visible: {sortedNotifications[i].gameObject.activeSelf})");
+        }
+    }
+
+    private void ResetOrderNotificationUI()
+    {
+        if (_notificationProperties == null || _notificationProperties.Length == 0) return;
+
+        for (int i = 0; i < _notificationProperties.Length; i++)
+        {
+            _notificationProperties[i].transform.SetSiblingIndex(i);
         }
     }
 }
