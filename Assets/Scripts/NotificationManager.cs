@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,6 +36,10 @@ public class NotificationManager : MonoBehaviour
         InitializedNotificationProperties();
 
         RequestUpdatedData();
+
+        UpdateNotificatioUI();
+
+        UpdateOrderUI();
     }
 
     void OnApplicationFocus(bool hasFocus)
@@ -85,6 +90,7 @@ public class NotificationManager : MonoBehaviour
                         _notificationProperties[i].SetTitle(notificationData[1]);
                         _notificationProperties[i].SetDescription(notificationData[2]);
                         _notificationProperties[i].SetIcon(int.Parse(notificationData[3]));
+                        _notificationProperties[i].SetOrder(int.Parse(notificationData[6]));
 
                         _notificationProperties[i].gameObject.SetActive(true);
                     }
@@ -132,6 +138,7 @@ public class NotificationManager : MonoBehaviour
         }
     }
 
+    // Unity-Change-Notifications-Schedule
     public void UpdateOrderOnDragAndDrop()
     {
         NotificationProperties[] notificationProperties = _notificationParent.GetComponentsInChildren<NotificationProperties>();
@@ -151,6 +158,39 @@ public class NotificationManager : MonoBehaviour
             {
                 notificationPlugin.CallStatic("updateOrderOnDragAndDrop", GetUnityActivity(), notificationId);
             }
+        }
+    }
+
+    private void UpdateOrderUI()
+    {
+        if (_notificationProperties == null || _notificationProperties.Length == 0) return;
+
+        List<NotificationProperties> visibleNotifications = new List<NotificationProperties>();
+        List<NotificationProperties> hiddenNotifications = new List<NotificationProperties>();
+
+        foreach (var notification in _notificationProperties)
+        {
+            if (notification.gameObject.activeSelf)
+            {
+                visibleNotifications.Add(notification);
+            }
+            else
+            {
+                hiddenNotifications.Add(notification);
+            }
+        }
+
+        visibleNotifications.Sort((a, b) => a.GetOrder().CompareTo(b.GetOrder()));
+        hiddenNotifications.Sort((a, b) => a.GetOrder().CompareTo(b.GetOrder()));
+
+        List<NotificationProperties> sortedNotifications = new List<NotificationProperties>();
+        sortedNotifications.AddRange(visibleNotifications);
+        sortedNotifications.AddRange(hiddenNotifications);
+
+        for (int i = 0; i < sortedNotifications.Count; i++)
+        {
+            sortedNotifications[i].transform.SetSiblingIndex(i);
+            Debug.Log($"UpdateOrder for {sortedNotifications[i]._notificationId} is {i} (Visible: {sortedNotifications[i].gameObject.activeSelf})");
         }
     }
 }

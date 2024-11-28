@@ -11,6 +11,7 @@ public class NotificationProperties : MonoBehaviour
     private TMP_Text _descriptionText;
     private RawImage _iconRawImage;
     private Button _removeNotificationButton;
+    private int _order;
 
     [Header("Notification icon list")]
     [SerializeField] private Texture2D[] _iconArray = null;
@@ -22,6 +23,7 @@ public class NotificationProperties : MonoBehaviour
         _descriptionText = transform.Find("DescriptionText").GetComponent<TMP_Text>();
         _iconRawImage = transform.Find("IconBackground/IconRawImage").GetComponent<RawImage>();
         _removeNotificationButton = transform.Find("DeleteButton").GetComponent<Button>();
+        _order = NULL_ID;
 
         // test
         SetTitle(transform.gameObject.name);
@@ -56,4 +58,9 @@ public class NotificationProperties : MonoBehaviour
             return unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
         }
     }
+
+    // Unity-Change-Notifications-Schedule
+    public void SetOrder(int order) { _order = order; }
+    public int GetOrder() { return _order; }
+    
 }
