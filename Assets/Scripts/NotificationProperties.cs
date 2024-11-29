@@ -12,6 +12,7 @@ public class NotificationProperties : MonoBehaviour
     private RawImage _iconRawImage;
     private Button _removeNotificationButton;
     private int _order;
+    public Image _progressBar;
 
     [Header("Notification icon list")]
     [SerializeField] private Texture2D[] _iconArray = null;
@@ -62,5 +63,13 @@ public class NotificationProperties : MonoBehaviour
     // Unity-Change-Notifications-Schedule
     public void SetOrder(int order) { _order = order; }
     public int GetOrder() { return _order; }
-    
+
+    public void SetProgressBar(float progress)
+    {
+        if (_progressBar != null)
+        {
+            _progressBar.fillAmount = progress;
+        }
+    }
+
 }

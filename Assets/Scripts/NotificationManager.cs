@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -81,16 +82,27 @@ public class NotificationManager : MonoBehaviour
 
                     string status = notificationData[5];
 
+                    // Set the progressBar
+                    long triggerTime = long.Parse(notificationData[4]);
+
                     if (status == "cancelled") {
                         _notificationProperties[i].gameObject.SetActive(false);
                     }
                     else
                     {
+                        // Set the progressBar
+                        long currentTimeMillis = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+                        float progress = Mathf.Clamp01((float)(triggerTime - currentTimeMillis) / (60000f /** int.Parse(notificationData[6])*/));
+                        _notificationProperties[i].SetProgressBar(progress);
+
                         _notificationProperties[i].SetNotificationId(int.Parse(notificationData[0]));
                         _notificationProperties[i].SetTitle(notificationData[1]);
                         _notificationProperties[i].SetDescription(notificationData[2]);
                         _notificationProperties[i].SetIcon(int.Parse(notificationData[3]));
                         _notificationProperties[i].SetOrder(int.Parse(notificationData[6]));
+
+                        
+                        
 
                         _notificationProperties[i].gameObject.SetActive(true);
                     }
@@ -152,7 +164,7 @@ public class NotificationManager : MonoBehaviour
         }
 
 
-        //Debug.Log($"OnEndDrag : {notificationId[0].ToString()} | {notificationId[1].ToString()} | {notificationId[2].ToString()} | {notificationId[3].ToString()} | {notificationId[4].ToString()}");
+        Debug.Log($"OnEndDrag : {notificationId[0].ToString()} | {notificationId[1].ToString()} | {notificationId[2].ToString()} | {notificationId[3].ToString()} | {notificationId[4].ToString()}");
 
         if (Application.platform == RuntimePlatform.Android)
         {
