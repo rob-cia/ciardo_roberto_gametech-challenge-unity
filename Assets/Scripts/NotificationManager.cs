@@ -86,6 +86,7 @@ public class NotificationManager : MonoBehaviour
                     long triggerTime = long.Parse(notificationData[4]);
 
                     if (status == "cancelled") {
+                        if (_notificationProperties[i].gameObject.GetComponent<Draggable>().IsDragging()) { _notificationProperties[i].gameObject.GetComponent<Draggable>().CancelDrag(); }
                         _notificationProperties[i].gameObject.SetActive(false);
                     }
                     else

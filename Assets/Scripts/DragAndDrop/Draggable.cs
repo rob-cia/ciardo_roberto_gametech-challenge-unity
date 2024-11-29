@@ -20,8 +20,12 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     [SerializeField]
     private NotificationManager _notificationManager = null;
 
+    private bool _isDragging = false;
+
     public void OnBeginDrag(PointerEventData eventData)
     {
+        _isDragging = true;
+
         placeHolder = Instantiate(_dropZone.placeHolder);//new GameObject();
         placeHolder.transform.SetParent(this.transform.parent);
         LayoutElement le = placeHolder.AddComponent<LayoutElement>();
@@ -85,5 +89,19 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         }
 
         _notificationManager.UpdateOrderOnDragAndDrop();
+    }
+
+    public bool IsDragging()
+    {
+        return _isDragging;
+    }
+
+    public void CancelDrag()
+    {
+        _isDragging = false;
+        this.transform.SetParent(parentToReturnTo);
+        this.transform.SetSiblingIndex(placeHolder.transform.GetSiblingIndex());
+        this.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        Destroy(placeHolder);
     }
 }
