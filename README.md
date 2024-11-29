@@ -49,6 +49,17 @@ ___
 <img src="https://github.com/user-attachments/assets/e4217023-fdf2-4866-abe7-47a736eed0e6" alt="layout" width="200"/>
 <img src="https://github.com/user-attachments/assets/0b108510-d7f5-4741-9581-eb768e436b80" alt="layout" width="200"/>
 
+___
+
+#### *TAG: Unity-Change-Notifications-Schedule*
+- Includes a new fixed progress bar layout on each notification that allows you to monitor the sending progress.
+- Modified the Notification prefab to handle notifications through a Layout Element and a Canvas Group.
+- Creating the NotificationSpacing prefab to handle the space under the notification during drag and drop
+
+<img src="https://github.com/user-attachments/assets/ef8006d7-8dce-405e-90d4-b581585f760f" alt="layout" width="200"/>
+<img src="https://github.com/user-attachments/assets/a1e89392-1d8c-4ae4-bf59-5a2a2389934e" alt="layout" width="200"/>
+<img src="https://github.com/user-attachments/assets/f305028c-2cec-4f77-b96d-6518696b4c4d" alt="layout" width="200"/>
+
 ---
 
 ### **Scripts**
@@ -156,6 +167,129 @@ ___
   - Calls the Android plugin method `removeNotificationById` via `AndroidJavaClass`:
     - Passes the Unity activity and `_notificationId` to the Android layer.
   - Triggered by a Unity "deleteButton"'s `OnClick` event.
+
+___
+
+#### *TAG: Unity-Change-Notifications-Schedule*
+
+---
+
+#### **DropZone Component**
+- **Class**: `DropZone`
+- **Description**: A Unity MonoBehaviour script that enables a GameObject to act as a drop zone for draggable objects, supporting drag-and-drop functionality using Unity's Event System.
+- **Details**:
+  - Implements the following interfaces:
+    - `IDropHandler`: Handles object drop logic.
+    - `IPointerEnterHandler`: Detects when a pointer enters the drop zone.
+    - `IPointerExitHandler`: Detects when a pointer exits the drop zone.
+- **Method**:
+  - `void OnPointerEnter(PointerEventData eventData)`
+    - **Description**: Updates the placeholder's parent transform to the current drop zone when a draggable object enters the zone.
+  - `void OnPointerExit(PointerEventData eventData)`
+    - **Description**: Resets the placeholder's parent transform to its original parent when the pointer exits the drop zone.
+  - `void OnDrop(PointerEventData eventData)`
+    - **Description**: Handles the logic when a draggable object is dropped onto the drop zone.
+   
+---
+
+#### **Draggable Component**
+- **Class**: `Draggable`
+- **Description**: A Unity MonoBehaviour script enabling drag-and-drop functionality for UI elements, including placeholder management and interaction with a `NotificationManager`.
+- **Details**:
+  - Implements the following interfaces:
+    - `IBeginDragHandler`: Handles actions when dragging begins.
+    - `IDragHandler`: Handles updates while dragging.
+    - `IEndDragHandler`: Handles actions when dragging ends.
+  - Supports placeholder management to maintain layout integrity during dragging.
+  - Interacts with the `NotificationManager` to update notification order after drag-and-drop operations.
+- **Method**:
+  - **`void OnBeginDrag(PointerEventData eventData)`**
+    - **Description**: Initializes the drag operation.
+    - **Details**:
+      - Creates a placeholder to maintain layout consistency.
+      - Stores the parent transforms (`parentToReturnTo` and `placeHolderParent`) for later restoration.
+      - Temporarily moves the dragged object to a higher-level parent for better UI control.
+      - Disables raycasting on the dragged object to allow interaction with drop zones.
+  
+  - **`void OnDrag(PointerEventData eventData)`**
+    - **Description**: Updates the position of the dragged object and adjusts the placeholder's position.
+    - **Details**:
+      - Moves the object to follow the pointer.
+      - Ensures the placeholder is reparented if its parent changes.
+      - Dynamically determines the placeholder's new sibling index based on the dragged object's position relative to other siblings.
+  
+  - **`void OnEndDrag(PointerEventData eventData)`**
+    - **Description**: Finalizes the drag operation.
+    - **Details**:
+      - Restores the dragged object to its original parent (`parentToReturnTo`).
+      - Sets the object's position based on the placeholder's sibling index.
+      - Destroys the placeholder.
+      - Calls `UpdateOrder` to notify the `NotificationManager` of any changes.
+  
+  - **`void UpdateOrder()`**
+    - **Description**: Notifies the `NotificationManager` to update the order of notifications.
+    - **Details**:
+      - Ensures that a `NotificationManager` is assigned in the inspector.
+      - Calls `UpdateOrderOnDragAndDrop` on the `NotificationManager` to propagate changes.
+  
+  - **`bool IsDragging()`**
+    - **Description**: Checks if the object is currently being dragged.
+    - **Returns**: `true` if dragging is in progress, otherwise `false`.
+  
+  - **`void CancelDrag()`**
+    - **Description**: Cancels the drag operation and restores the object to its original state.
+    - **Details**:
+      - Restores the object's parent and sibling index.
+      - Re-enables raycasting.
+      - Destroys the placeholder.
+
+---
+
+#### **Update Order On Drag And Drop**
+- **Method**: `UpdateOrderOnDragAndDrop()`
+- **Description**: Updates the order of notifications after a drag-and-drop operation is completed, synchronizing with the Android plugin.
+- **Details**:
+  - Collects the `NotificationProperties` components of all child notifications.
+  - Extracts their `_notificationId` values into an integer array for processing.
+  - Calls the `updateOrderOnDragAndDrop` method of the Android plugin, passing the Unity activity and the array of notification IDs to update the order on the Android side.
+  - Triggered when a drag-and-drop action is completed in the UI (`OnEndDrag()`).
+
+---
+
+#### **Update Order UI**
+- **Method**: `UpdateOrderUI()`
+- **Description**: Updates the UI to reflect the correct order of notifications based on their `order` property and visibility status.
+- **Details**:
+  - Separates notifications into visible and hidden lists based on their `activeSelf` property.
+  - Sorts both lists according to the notification's `GetOrder()` value.
+  - Combines the sorted lists and sets the sibling index for each notification to update their order in the UI.
+  - Triggered when the UI needs to be refreshed at the start of application.
+
+---
+
+#### **Reset Order Notification UI**
+- **Method**: `ResetOrderNotificationUI()`
+- **Description**: Resets the UI order of notifications to their original state.
+- **Details**:
+  - Loops through all notifications and resets their sibling index to match the original order in which they were added.
+  - Triggered when the UI needs to be reset at the button send event click.
+
+---
+
+#### **Update Notification UI** (UPDATED)
+- **Method**: `UpdateNotificatioUI()`
+- **Description**: Updates the Unity UI to reflect the current state of scheduled notifications retrieved from the Android plugin.
+- **Details**:
+  - Retrieves the list of scheduled notifications from the native Android plugin via `getScheduledNotifications`.
+  - For each notification in the retrieved data:
+    - Extracts relevant details such as the notification ID, title, description, icon, trigger time, and status.
+    - If the notification status is "cancelled":
+      - Deactivates the notification in the UI.
+      - Cancels any ongoing drag operation for that notification.
+    - If the notification is not cancelled:
+      - Calculates the progress based on the difference between the trigger time and the current time, updating the progress bar.
+      - Updates the UI components of the notification (ID, title, description, icon, and order).
+      - Activates the notification in the UI.
 
 ---
 
